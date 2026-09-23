@@ -148,8 +148,8 @@ Besides the volume, the modifier interpolates the `lowpassGain` of an affected s
 authored `outdoor` value, so with a fully opened door the outdoor sounds sound like they would in the outdoor camera.
 
 If a sample is classified as an outdoor sound but should not be modified, it can be excluded in the 
-vehicle's sound XML: Use the attribute `excludeFromICSoundModifier` to exclude a sample from
-the modifier as a whole, for both the volume and the `lowpassGain` handling:
+vehicle's sound XML: Use the attribute `excludeFromICSoundModifier` (default `false`) to exclude a sample
+from the modifier as a whole, for both the volume and the `lowpassGain` handling:
 
 ```xml
 <motor template="engineLarge" file="sounds/engine.gls" excludeFromICSoundModifier="true">

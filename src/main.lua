@@ -109,6 +109,14 @@ local function getModifierFactor(soundManager, superFunc, sample, modifierName)
     return superFunc(soundManager, sample, modifierName)
 end
 
+---Appended function: SoundManager.registerGenericSampleXMLPaths
+---Registers the optional 'excludeFromICSoundModifier' sound sample opt-out
+---@param schema XMLSchema Instance of XMLSchema
+---@param soundPath string Base xml path of the sound sample
+local function registerGenericSampleXMLPaths(schema, soundPath)
+    schema:register(XMLValueType.BOOL, soundPath .. "#excludeFromICSoundModifier", "Excludes the sound sample from the Interactive Control sound modifier", false)
+end
+
 ---Overwritten function: SoundManager.loadSampleAttributesFromXML
 ---Loads the optional 'excludeFromICSoundModifier="true"' opt-out into the sample
 ---@param soundManager table soundManager table
@@ -255,6 +263,7 @@ local function init()
 
     TypeManager.validateTypes = Utils.prependedFunction(TypeManager.validateTypes, validateTypes)
     SoundManager.getModifierFactor = Utils.overwrittenFunction(SoundManager.getModifierFactor, getModifierFactor)
+    SoundManager.registerGenericSampleXMLPaths = Utils.appendedFunction(SoundManager.registerGenericSampleXMLPaths, registerGenericSampleXMLPaths)
     SoundManager.loadSampleAttributesFromXML = Utils.overwrittenFunction(SoundManager.loadSampleAttributesFromXML, loadSampleAttributesFromXML)
     Dashboard.defaultDashboardStateFunc = Utils.overwrittenFunction(Dashboard.defaultDashboardStateFunc, defaultDashboardStateFunc)
 
